@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Presensi Sekolah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="w-80 bg-white neobrutal-nav p-4 hidden md:block">
+            <div class="mb-8 flex items-center">
+                <div
+                    class="w-12 h-12 bg-sekolah rounded-lg flex items-center justify-center mr-3 border-3 border-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                        <path
+                            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold">SIP<span class="text-sekolah">PRESENSI</span></h1>
+                    <p class="text-xs font-bold text-gray-600">SMKN 1 DIGITAL</p>
+                </div>
+            </div>
+
+            <nav>
+                <div class="mb-6">
+                    <p class="text-xs font-extrabold uppercase text-gray-500 mb-3">MENU UTAMA</p>
+                    <a href="#" class="block py-3 px-4 bg-sekolah text-white neobrutal-card mb-3 font-bold">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                            Dashboard
+                        </div>
+                    </a>
+                    <a href="#" class="block py-3 px-4 hover:bg-gray-100 mb-3 font-bold">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                            Presensi Hari Ini
+                        </div>
+                    </a>
+                    <a href="#" class="block py-3 px-4 hover:bg-gray-100 mb-3 font-bold">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            Rekap Bulanan
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mb-6">
+                    <p class="text-xs font-extrabold uppercase text-gray-500 mb-3">MANAJEMEN</p>
+                    <a href="#" class="block py-3 px-4 hover:bg-gray-100 mb-3 font-bold">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            Data Siswa
+                        </div>
+                    </a>
+                    <a href="#" class="block py-3 px-4 hover:bg-gray-100 mb-3 font-bold">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            Data Guru
+                        </div>
+                    </a>
+                    <a href="#" class="block py-3 px-4 hover:bg-gray-100 mb-3 font-bold">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                            Data Kelas
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mb-6">
+                    <p class="text-xs font-extrabold uppercase text-gray-500 mb-3">PENGATURAN</p>
+                    <a href="#" class="block py-3 px-4 hover:bg-gray-100 mb-3 font-bold">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            Pengaturan Sistem
+                        </div>
+                    </a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <!-- Header -->
+            <header class="bg-white neobrutal-nav p-4 flex justify-between items-center">
+                <div class="flex items-center">
+                    <button class="md:hidden mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                    <h2 class="text-xl font-extrabold">DASHBOARD PRESENSI</h2>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <div class="bg-sekolah text-white px-4 py-2 rounded-md font-bold border-3 border-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            Senin, 17 Juni 2024
+                        </div>
+                    </div>
+                    <div
+                        class="w-12 h-12 bg-sekolah rounded-full flex items-center justify-center font-bold text-white border-3 border-black">
+                        AD</div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <main class="p-6">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 neobrutal-card">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-500 text-sm font-bold">TOTAL SISWA</p>
+                                <h3 class="text-3xl font-extrabold mt-2 text-siswa">1,240</h3>
+                                <p class="text-gray-500 text-sm mt-2">12 Kelas</p>
+                            </div>
+                            <div class="bg-siswa bg-opacity-20 p-3 rounded-md border-3 border-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-siswa" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 neobrutal-card">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-500 text-sm font-bold">TOTAL GURU</p>
+                                <h3 class="text-3xl font-extrabold mt-2 text-guru">84</h3>
+                                <p class="text-gray-500 text-sm mt-2">10 Mapel</p>
+                            </div>
+                            <div class="bg-guru bg-opacity-20 p-3 rounded-md border-3 border-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-guru" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 neobrutal-card">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-500 text-sm font-bold">PRESENSI HARI INI</p>
+                                <h3 class="text-3xl font-extrabold mt-2 text-presensi">87%</h3>
+                                <p class="text-gray-500 text-sm mt-2">1,078 dari 1,240</p>
+                            </div>
+                            <div class="bg-presensi bg-opacity-20 p-3 rounded-md border-3 border-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-presensi" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 neobrutal-card">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-500 text-sm font-bold">TIDAK HADIR</p>
+                                <h3 class="text-3xl font-extrabold mt-2 text-absen">162</h3>
+                                <p class="text-gray-500 text-sm mt-2">13% dari total</p>
+                            </div>
+                            <div class="bg-absen bg-opacity-20 p-3 rounded-md border-3 border-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-absen" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Presensi Section -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 neobrutal-card lg:col-span-2">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-extrabold text-lg">STATUS PRESENSI HARI INI</h3>
+                            <button class="neobrutal-btn bg-sekolah text-white px-4 py-1.5 text-sm font-bold">
+                                LIHAT DETAIL
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-4 gap-4 mb-6">
+                            <div class="bg-green-100 p-3 text-center border-3 border-black">
+                                <p class="text-2xl font-extrabold text-green-800">1,078</p>
+                                <p class="text-sm font-bold">HADIR</p>
+                            </div>
+                            <div class="bg-yellow-100 p-3 text-center border-3 border-black">
+                                <p class="text-2xl font-extrabold text-yellow-800">42</p>
+                                <p class="text-sm font-bold">IZIN</p>
+                            </div>
+                            <div class="bg-blue-100 p-3 text-center border-3 border-black">
+                                <p class="text-2xl font-extrabold text-blue-800">35</p>
+                                <p class="text-sm font-bold">SAKIT</p>
+                            </div>
+                            <div class="bg-red-100 p-3 text-center border-3 border-black">
+                                <p class="text-2xl font-extrabold text-red-800">85</p>
+                                <p class="text-sm font-bold">ALPA</p>
+                            </div>
+                        </div>
+                        <div class="h-64 bg-gray-100 border-3 border-black flex items-center justify-center">
+                            <!-- Chart placeholder -->
+                            <p class="text-gray-500 font-bold">GRAFIK PRESENSI PER KELAS</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 neobrutal-card">
+                        <h3 class="font-extrabold text-lg mb-6">KELAS DENGAN ABSENSI TERENDAH</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center p-3 bg-red-50 border-2 border-black">
+                                <div
+                                    class="w-12 h-12 bg-red-100 rounded-md border-3 border-black mr-4 flex items-center justify-center font-bold text-red-800">
+                                    XII
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-extrabold">XII RPL 2</p>
+                                    <p class="text-sm font-bold text-gray-600">25% tidak hadir (15 siswa)</p>
+                                </div>
+                                <span
+                                    class="bg-red-100 text-red-800 text-sm font-bold px-2 py-1 rounded border-2 border-black">!</span>
+                            </div>
+
+                            <div class="flex items-center p-3 bg-yellow-50 border-2 border-black">
+                                <div
+                                    class="w-12 h-12 bg-yellow-100 rounded-md border-3 border-black mr-4 flex items-center justify-center font-bold text-yellow-800">
+                                    XI
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-extrabold">XI TKJ 1</p>
+                                    <p class="text-sm font-bold text-gray-600">18% tidak hadir (10 siswa)</p>
+                                </div>
+                                <span
+                                    class="bg-yellow-100 text-yellow-800 text-sm font-bold px-2 py-1 rounded border-2 border-black">!</span>
+                            </div>
+
+                            <div class="flex items-center p-3 bg-blue-50 border-2 border-black">
+                                <div
+                                    class="w-12 h-12 bg-blue-100 rounded-md border-3 border-black mr-4 flex items-center justify-center font-bold text-blue-800">
+                                    X
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-extrabold">X MM 3</p>
+                                    <p class="text-sm font-bold text-gray-600">15% tidak hadir (8 siswa)</p>
+                                </div>
+                                <span
+                                    class="bg-blue-100 text-blue-800 text-sm font-bold px-2 py-1 rounded border-2 border-black">!</span>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <button class="neobrutal-btn bg-sekolah text-white px-4 py-1.5 text-sm font-bold">
+                                    LIHAT SEMUA KELAS
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Presensi -->
+                <div class="bg-white p-6 neobrutal-card">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-extrabold text-lg">REKAP PRESENSI TERBARU</h3>
+                        <button class="neobrutal-btn bg-sekolah text-white px-4 py-1.5 text-sm font-bold">
+                            EKSPOR DATA
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="border-b-3 border-black">
+                                    <th class="text-left py-4 px-4 font-extrabold">NAMA SISWA</th>
+                                    <th class="text-left py-4 px-4 font-extrabold">KELAS</th>
+                                    <th class="text-left py-4 px-4 font-extrabold">TANGGAL</th>
+                                    <th class="text-left py-4 px-4 font-extrabold">JAM</th>
+                                    <th class="text-left py-4 px-4 font-extrabold">STATUS</th>
+                                    <th class="text-left py-4 px-4 font-extrabold">KETERANGAN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b-2 border-gray-200">
+                                    <td class="py-4 px-4 font-bold">Ahmad Dani</td>
+                                    <td class="py-4 px-4 font-bold">XII RPL 1</td>
+                                    <td class="py-4 px-4 font-bold">17/06/2024</td>
+                                    <td class="py-4 px-4 font-bold">07:15</td>
+                                    <td class="py-4 px-4">
+                                        <span
+                                            class="bg-green-100 text-green-800 text-sm font-bold px-3 py-1 rounded border-2 border-black">HADIR</span>
+                                    </td>
+                                    <td class="py-4 px-4 font-bold">-</td>
+                                </tr>
+                                <tr class="border-b-2 border-gray-200">
+                                    <td class="py-4 px-4 font-bold">Budi Santoso</td>
+                                    <td class="py-4 px-4 font-bold">XII TKJ 2</td>
+                                    <td class="py-4 px-4 font-bold">17/06/2024</td>
+                                    <td class="py-4 px-4 font-bold">07:20</td>
+                                    <td class="py-4 px-4">
+                                        <span
+                                            class="bg-yellow-100 text-yellow-800 text-sm font-bold px-3 py-1 rounded border-2 border-black">IZIN</span>
+                                    </td>
+                                    <td class="py-4 px-4 font-bold">Acara keluarga</td>
+                                </tr>
+                                <tr class="border-b-2 border-gray-200">
+                                    <td class="py-4 px-4 font-bold">Citra Dewi</td>
+                                    <td class="py-4 px-4 font-bold">XI MM 1</td>
+                                    <td class="py-4 px-4 font-bold">17/06/2024</td>
+                                    <td class="py-4 px-4 font-bold">-</td>
+                                    <td class="py-4 px-4">
+                                        <span
+                                            class="bg-blue-100 text-blue-800 text-sm font-bold px-3 py-1 rounded border-2 border-black">SAKIT</span>
+                                    </td>
+                                    <td class="py-4 px-4 font-bold">Demam</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 font-bold">Dian Pratama</td>
+                                    <td class="py-4 px-4 font-bold">X RPL 3</td>
+                                    <td class="py-4 px-4 font-bold">17/06/2024</td>
+                                    <td class="py-4 px-4 font-bold">-</td>
+                                    <td class="py-4 px-4">
+                                        <span
+                                            class="bg-red-100 text-red-800 text-sm font-bold px-3 py-1 rounded border-2 border-black">ALPA</span>
+                                    </td>
+                                    <td class="py-4 px-4 font-bold">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
