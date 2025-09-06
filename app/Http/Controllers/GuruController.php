@@ -101,6 +101,12 @@ class GuruController extends Controller
         return redirect()->route('guru.index')->with('success', 'Guru berhasil ditambahkan');
     }
 
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return view('dashboard.show', compact('user'));
+    }
+
     public function edit($id)
     {
         $guru = User::findOrFail($id);

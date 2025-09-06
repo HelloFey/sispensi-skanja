@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
 //     Route::get('/presensi/export', [PresensiController::class, 'export'])->name('presensi.export');
 // });
 
+// Route::resource('/pengguna', GuruController::class);
 Route::resource('presensi', PresensiController::class);
 Route::get('/rekap', [PresensiController::class, 'rekap'])->name('presensi.rekap');
 

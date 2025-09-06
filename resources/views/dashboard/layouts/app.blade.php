@@ -21,7 +21,7 @@
                     <a href="/">
                         <div
                             class="w-10 h-10 border-3 border-black flex items-center justify-center text-white font-bold">
-                            <img src="logo.png" alt="" class="w-10">
+                            <img src="{{asset("logo.png")}}" alt="" class="w-10">
                         </div>
                     </a>
                 </div>
@@ -114,7 +114,7 @@
 
                 <div class="mb-6">
                     <p class="text-xs font-extrabold uppercase text-gray-500 mb-3">PENGATURAN</p>
-                    <a href="#" class="block py-3 px-4 hover:bg-gray-100 mb-3 font-bold">
+                    <a href="{{route('guru.show', [Auth::user()])}}" class="block py-3 px-4 hover:bg-gray-100 mb-3 font-bold">
                         <div class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -123,7 +123,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
-                            Pengaturan Sistem
+                            Tentang Saya
                         </div>
                     </a>
                 </div>
