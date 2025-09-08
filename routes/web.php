@@ -58,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
 // Route::resource('/pengguna', GuruController::class);
 Route::resource('presensi', PresensiController::class);
 Route::get('/rekap', [PresensiController::class, 'rekap'])->name('presensi.rekap');
-
+Route::fallback(fn() => view('errors.404'));
 
 Route::get('/rekap-semester', function () {
     return view('dashboard.rekapsemester');
