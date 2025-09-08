@@ -151,6 +151,23 @@ class PresensiController extends Controller
         $startDate = $request->start_date ?? now()->startOfMonth()->format('Y-m-d');
         $endDate = $request->end_date ?? now()->endOfMonth()->format('Y-m-d');
 
+        // Parameter tambahan untuk mutasi
+        $semester = $request->semester ?? 'ganjil';
+        $tahunAjaran = $request->tahun_ajaran ?? null;
+
+        // Tentukan rentang tanggal berdasarkan semester
+        if ($request->has('semester') || $request->has('tahun_ajaran')) {
+            $tahun = $tahunAjaran ? explode('/', $tahunAjaran)[0] : now()->year;
+
+            if ($semester == 'ganjil') {
+                $startDate = $tahun . '-07-01';
+                $endDate = $tahun . '-12-31';
+            } else {
+                $startDate = ($tahun + 1) . '-01-01';
+                $endDate = ($tahun + 1) . '-06-30';
+            }
+        }
+
         // Query untuk rekap presensi
         $query = Presensi::with(['siswa.kelas', 'user'])
             ->whereBetween('tanggal', [$startDate, $endDate])
@@ -170,9 +187,16 @@ class PresensiController extends Controller
             });
         }
 
+        // Filter tahun ajaran
+        if ($tahunAjaran) {
+            $query->whereHas('siswa.kelas', function ($q) use ($tahunAjaran) {
+                $q->where('tahun_ajar', $tahunAjaran);
+            });
+        }
+
         $presensi = $query->paginate(20);
 
-        // Hitung statistik
+        // Hitung statistik presensi
         $totalSiswa = Siswa::when($request->kelas, function ($q) use ($request) {
             $q->whereHas('kelas', function ($q) use ($request) {
                 $q->where('tingkat_kelas', $request->kelas);
@@ -181,6 +205,11 @@ class PresensiController extends Controller
             ->when($request->jurusan, function ($q) use ($request) {
                 $q->whereHas('kelas', function ($q) use ($request) {
                     $q->where('jurusan', $request->jurusan);
+                });
+            })
+            ->when($tahunAjaran, function ($q) use ($tahunAjaran) {
+                $q->whereHas('kelas', function ($q) use ($tahunAjaran) {
+                    $q->where('tahun_ajar', $tahunAjaran);
                 });
             })
             ->where('status', 'aktif')
@@ -198,6 +227,11 @@ class PresensiController extends Controller
                     $q->where('jurusan', $request->jurusan);
                 });
             })
+            ->when($tahunAjaran, function ($q) use ($tahunAjaran) {
+                $q->whereHas('siswa.kelas', function ($q) use ($tahunAjaran) {
+                    $q->where('tahun_ajar', $tahunAjaran);
+                });
+            })
             ->count();
 
         $totalIzin = Presensi::whereBetween('tanggal', [$startDate, $endDate])
@@ -212,12 +246,105 @@ class PresensiController extends Controller
                     $q->where('jurusan', $request->jurusan);
                 });
             })
+            ->when($tahunAjaran, function ($q) use ($tahunAjaran) {
+                $q->whereHas('siswa.kelas', function ($q) use ($tahunAjaran) {
+                    $q->where('tahun_ajar', $tahunAjaran);
+                });
+            })
             ->count();
 
         $totalAlpha = $totalSiswa - ($totalHadir + $totalIzin);
 
+        // Hitung statistik mutasi siswa
+        // Siswa masuk (baru aktif dalam periode semester)
+        $siswaMasuk = Siswa::when($request->kelas, function ($q) use ($request) {
+            $q->whereHas('kelas', function ($q) use ($request) {
+                $q->where('tingkat_kelas', $request->kelas);
+            });
+        })
+            ->when($request->jurusan, function ($q) use ($request) {
+                $q->whereHas('kelas', function ($q) use ($request) {
+                    $q->where('jurusan', $request->jurusan);
+                });
+            })
+            ->when($tahunAjaran, function ($q) use ($tahunAjaran) {
+                $q->whereHas('kelas', function ($q) use ($tahunAjaran) {
+                    $q->where('tahun_ajar', $tahunAjaran);
+                });
+            })
+            ->where('status', 'aktif')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->count();
+
+        // Siswa keluar (status pindah/keluar dalam periode semester)
+        $siswaKeluar = Siswa::when($request->kelas, function ($q) use ($request) {
+            $q->whereHas('kelas', function ($q) use ($request) {
+                $q->where('tingkat_kelas', $request->kelas);
+            });
+        })
+            ->when($request->jurusan, function ($q) use ($request) {
+                $q->whereHas('kelas', function ($q) use ($request) {
+                    $q->where('jurusan', $request->jurusan);
+                });
+            })
+            ->when($tahunAjaran, function ($q) use ($tahunAjaran) {
+                $q->whereHas('kelas', function ($q) use ($tahunAjaran) {
+                    $q->where('tahun_ajar', $tahunAjaran);
+                });
+            })
+            ->whereIn('status', ['pindah', 'keluar'])
+            ->whereBetween('updated_at', [$startDate, $endDate])
+            ->count();
+
+        // Detail mutasi untuk ditampilkan di tabel
+        $mutasiMasuk = Siswa::with(['kelas'])
+            ->when($request->kelas, function ($q) use ($request) {
+                $q->whereHas('kelas', function ($q) use ($request) {
+                    $q->where('tingkat_kelas', $request->kelas);
+                });
+            })
+            ->when($request->jurusan, function ($q) use ($request) {
+                $q->whereHas('kelas', function ($q) use ($request) {
+                    $q->where('jurusan', $request->jurusan);
+                });
+            })
+            ->when($tahunAjaran, function ($q) use ($tahunAjaran) {
+                $q->whereHas('kelas', function ($q) use ($tahunAjaran) {
+                    $q->where('tahun_ajar', $tahunAjaran);
+                });
+            })
+            ->where('status', 'aktif')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->get();
+
+        $mutasiKeluar = Siswa::with(['kelas'])
+            ->when($request->kelas, function ($q) use ($request) {
+                $q->whereHas('kelas', function ($q) use ($request) {
+                    $q->where('tingkat_kelas', $request->kelas);
+                });
+            })
+            ->when($request->jurusan, function ($q) use ($request) {
+                $q->whereHas('kelas', function ($q) use ($request) {
+                    $q->where('jurusan', $request->jurusan);
+                });
+            })
+            ->when($tahunAjaran, function ($q) use ($tahunAjaran) {
+                $q->whereHas('kelas', function ($q) use ($tahunAjaran) {
+                    $q->where('tahun_ajar', $tahunAjaran);
+                });
+            })
+            ->whereIn('status', ['pindah', 'keluar'])
+            ->whereBetween('updated_at', [$startDate, $endDate])
+            ->get();
+
         $kelasList = Kelas::select('tingkat_kelas')->distinct()->pluck('tingkat_kelas');
         $jurusanList = Kelas::select('jurusan')->distinct()->pluck('jurusan');
+
+        // Ambil list tahun ajar dari tabel kelas
+        $tahunAjarList = Kelas::select('tahun_ajar')
+            ->distinct()
+            ->orderBy('tahun_ajar', 'desc')
+            ->pluck('tahun_ajar');
 
         return view('dashboard.presensi.rekap', compact(
             'presensi',
@@ -225,10 +352,17 @@ class PresensiController extends Controller
             'totalHadir',
             'totalIzin',
             'totalAlpha',
+            'siswaMasuk',
+            'siswaKeluar',
+            'mutasiMasuk',
+            'mutasiKeluar',
             'kelasList',
             'jurusanList',
+            'tahunAjarList',
             'startDate',
-            'endDate'
+            'endDate',
+            'semester',
+            'tahunAjaran'
         ));
     }
 

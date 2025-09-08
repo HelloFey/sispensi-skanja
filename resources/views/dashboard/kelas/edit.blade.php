@@ -89,10 +89,18 @@
                     <div>
                         <label class="block text-xs md:text-sm font-bold mb-2">TAHUN AJAR <span
                                 class="text-red-500">*</span></label>
-                        <input name="tahun_ajar" type="text" maxlength="9" required
-                            class="w-full px-3 py-2 md:px-4 md:py-2 border-2 md:border-3 border-black rounded-md font-bold focus:outline-none focus:ring-2 focus:ring-sekolah text-sm md:text-base"
-                            value="{{ old('tahun_ajar', $kelas->tahun_ajar) }}">
+                        <select name="tahun_ajar" required
+                            class="w-full px-3 py-2 md:px-4 md:py-2 border-2 md:border-3 border-black rounded-md font-bold focus:outline-none focus:ring-2 focus:ring-sekolah text-sm md:text-base">
+                            <option value="{{ old('tahun_ajar', $kelas->tahun_ajar) }}">{{ old('tahun_ajar', $kelas->tahun_ajar)}}</option>
+                            @php
+                                $startYear = 2023;
+                                $endYear = 2030; // Until 2030/2031
 
+                                for ($year = $startYear; $year <= $endYear; $year++) {
+                                    echo "<option value='$year/" . ($year + 1) . "'>$year/" . ($year + 1) . '</option>';
+                                }
+                            @endphp
+                        </select>
                         @error('tahun_ajar')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
